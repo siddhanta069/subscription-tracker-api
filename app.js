@@ -4,11 +4,21 @@ import authRouter from './routes/auth.routes.js';
 import subscriptionRouter from './routes/subscription.routes.js';
 import userRouter from './routes/user.routes.js';
 import connectToDatabase from './database/mongodb.js';
+import errorMiddleware from './middlewares/error.middleware.js';
+import cookieParser from 'cookie-parser';
 
 const app = express(); 
+
+app.use(express.json()); //middleware to parse JSON request body
+app.use(express.urlencoded({ extended: false })); //middleware to parse URL-encoded request body
+app.use(cookieParser()); //middleware to parse cookies //
+
+//routes
 app.use('api/v1/auth', authRouter); // means http://localhost:5500/api/v1/auth/sign-up
 app.use('api/v1/subscription', subscriptionRouter);
 app.use('api/v1/users', userRouter);
+
+app.use(errorMiddleware)
 
 
 app.get('/', (req, res) => {
