@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: false })); //middleware to parse URL-enco
 app.use(cookieParser()); //middleware to parse cookies //
 
 //routes
-app.use('api/v1/auth', authRouter); // means http://localhost:5500/api/v1/auth/sign-up
-app.use('api/v1/subscription', subscriptionRouter);
-app.use('api/v1/users', userRouter);
+app.use('/api/v1/auth', authRouter); // means http://localhost:5500/api/v1/auth/
+app.use('/api/v1/subscription', subscriptionRouter);
+app.use('/api/v1/users', userRouter);
 
 app.use(errorMiddleware)
 
